@@ -3,9 +3,6 @@ import torch
 import importlib
 import time
 from sklearn.metrics import roc_auc_score,confusion_matrix,f1_score
-from .diffusion.reconstructphase import *
-from .diffusion.diffDefence import *
-from .diffusion.ddpm_purify import *
 AverageMeter = importlib.import_module(f"src.utils.metrics").AverageMeter
 ProgressMeter = importlib.import_module(f"src.utils.metrics").ProgressMeter
 accuracy = importlib.import_module(f"src.utils.metrics").accuracy
@@ -63,11 +60,10 @@ def test(model, criterion, dataloader, opt, device, logger):
             opt.clip_max,
         )
         adv_images.to(device)
-        diffusion = getGenerator(config)
-        radv_images = image_editing_sample(img=adv_images, model=diffusion)
+
 
         # compute output
-        adv_outputs = model(radv_images)
+        adv_outputs = model(adv_images)
         #predict
         y_pred_adv_batch = torch.max(adv_outputs, dim=1)[1]
         adv_loss = criterion(adv_outputs, labels)
