@@ -8,8 +8,7 @@ AverageMeter = importlib.import_module(f"src.utils.metrics").AverageMeter
 ProgressMeter = importlib.import_module(f"src.utils.metrics").ProgressMeter
 accuracy = importlib.import_module(f"src.utils.metrics").accuracy
 mim_whitebox = importlib.import_module("src.utils.adv").mim_whitebox
-from .diffusion.diffDefence import *
-from .diffusion.ddpm_purify import *
+
 
 def test(model, criterion, dataloader, opt, device, logger):
     batch_time = AverageMeter("Time", ":6.3f")
@@ -63,10 +62,9 @@ def test(model, criterion, dataloader, opt, device, logger):
             is_random=not opt.const_init,
         )
         adv_images.to(device)
-        diffusion = getGenerator(config)
-        radv_images = image_editing_sample(img=images, model=diffusion)
+
         # compute output
-        adv_outputs = model(radv_images)
+        adv_outputs = model(adv_images)
         # predict
         y_pred_adv_batch = torch.max(adv_outputs, dim=1)[1]
         adv_loss = criterion(adv_outputs, labels)
