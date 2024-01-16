@@ -7,8 +7,7 @@ AverageMeter = importlib.import_module(f"src.utils.metrics").AverageMeter
 ProgressMeter = importlib.import_module(f"src.utils.metrics").ProgressMeter
 accuracy = importlib.import_module(f"src.utils.metrics").accuracy
 cw_whitebox = importlib.import_module("src.utils.adv").cw_whitebox
-from .diffusion.diffDefence import *
-from .diffusion.ddpm_purify import *
+
 
 def test(model, criterion, dataloader, opt, device, logger):
     batch_time = AverageMeter("Time", ":6.3f")
