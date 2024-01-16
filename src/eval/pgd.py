@@ -1,13 +1,11 @@
 import importlib
 import time
 from PIL import Image
-from .diffusion.reconstructphase import *
-from .diffusion.diffDefence import *
 AverageMeter = importlib.import_module(f"src.utils.metrics").AverageMeter
 ProgressMeter = importlib.import_module(f"src.utils.metrics").ProgressMeter
 accuracy = importlib.import_module(f"src.utils.metrics").accuracy
 pgd_whitebox = importlib.import_module("src.utils.adv").pgd_whitebox
-from .diffusion.ddpm_purify import *
+
 
 
 def test(model, criterion, dataloader, opt, device, logger):
@@ -56,22 +54,14 @@ def test(model, criterion, dataloader, opt, device, logger):
         adv_images.to(device)
         # compute output
         # get_attn(model, adv_images)
-        diffusion = getGenerator(config)
-        radv_images=image_editing_sample(img=adv_images,model=diffusion)
-        print(radv_images[0].shape)
-        if i==0:
-            imag=((radv_images[0].permute(1,2,0).cpu().numpy()+ 1) / 2.0 * 255.0).astype(np.uint8)
-            imag=Image.fromarray(imag)
 
-            imag.save(f'./kk.png')
 
-        radv_images = radv_images.cuda()
-        adv_outputs = model(radv_images)
+
+        adv_outputs = model(adv_images)
         adv_loss = criterion(adv_outputs, labels)
         # Statistics
         acc1, _ = accuracy(adv_outputs, labels, topk=(1, ))
         adv_losses.update(adv_loss.item(), adv_outputs.size(0))
-        print(acc1[0].item())
         adv_top1.update(acc1[0].item(), adv_outputs.size(0))
 
         # measure elapsed time
