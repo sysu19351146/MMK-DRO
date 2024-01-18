@@ -184,9 +184,6 @@ class Trainer:
             kwargs.update(dict(cap_adversary=self.cap_adversary))
             kwargs.update(dict(lamda=self.lamda))
             kwargs.update(dict(tau=self.tau))
-        elif self.args.train_method == 'udr':
-            kwargs.update(dict(lamda=self.lamda))
-            kwargs.update(dict(tau=self.tau))
         elif self.args.train_method == 'awp':
             kwargs.update(dict(awp_adversary=self.awp_adversary))
         elif self.args.train_method == 'hat':
