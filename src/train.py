@@ -100,8 +100,8 @@ class Trainer:
             self.proxy_optimizer = get_optimizer(self.proxy_model, self.args.optimizer, self.args.lr)
             self.awp_adversary = TradesAWP(model=self.model, proxy=self.proxy_model,
                                            proxy_optim=self.proxy_optimizer, gamma=self.args.awp_gamma)
-        # CAP
-        elif self.args.train_method == 'cap':
+        # MMKDRO
+        elif self.args.train_method == 'MMKDRO':
             self.proxy_model = copy.deepcopy(self.model)
             self.proxy_model = self.proxy_model.to(self.device)
             self.proxy_optimizer = get_optimizer(self.proxy_model, self.args.optimizer, self.args.lr)
@@ -124,7 +124,7 @@ class Trainer:
         Perform a complete training process
         """
         init_time = time.time()
-        if self.args.train_method == 'cap' or self.args.train_method == 'udr':
+        if self.args.train_method == 'MMKDRO' :
             self.lamda = torch.tensor(1, requires_grad=False).cuda()
             self.dis_cum = []
             lr_tau=0.01
@@ -140,7 +140,7 @@ class Trainer:
 
             train_acc, train_loss, val_acc, val_loss, adv_acc, adv_loss = self.train_a_epoch(epoch)
 
-            if self.args.train_method == 'cap' or self.args.train_method == 'udr':
+            if self.args.train_method == 'MMKDRO' :
                 self.tau = self.tau + lr_tau * self.tau
                 if epoch % 10 == 0:
                     self.lamda = self.lamda - 0.02 * (0.03 - sum(self.dis_cum) / len(self.dis_cum))
@@ -180,7 +180,7 @@ class Trainer:
         #     step=self.num_steps)
         if self.args.train_method == 'mma':
             kwargs.update(dict(mma_trainer=self.mma_trainer))
-        elif self.args.train_method == 'cap':
+        elif self.args.train_method == 'MMKDRO':
             kwargs.update(dict(cap_adversary=self.cap_adversary))
             kwargs.update(dict(lamda=self.lamda))
             kwargs.update(dict(tau=self.tau))
@@ -192,17 +192,12 @@ class Trainer:
         elif self.args.train_method == 'hat':
             kwargs.update(dict(hr_model=self.hr_model))
 
-        if self.args.train_method == 'cap':
+        if self.args.train_method == 'MMKDRO':
             self.model, train_loss, nat_loss, kl_loss, train_nat_acc,delta = self.trainer(**kwargs)
 
             dis = torch.mean(mynorm(delta, order=1), dim=0)
             self.dis_cum.append(dis)
-            #self.dis_cum += delta
-        elif self.args.train_method == 'udr':
-            self.model, train_loss, nat_loss, kl_loss, train_nat_acc,delta = self.trainer(**kwargs)
 
-            dis = torch.mean(mynorm(delta, order=1), dim=0)
-            self.dis_cum.append(dis)
         else:
             self.model, train_loss, nat_loss, kl_loss, train_nat_acc = self.trainer(**kwargs)
 
