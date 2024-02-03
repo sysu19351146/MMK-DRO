@@ -17,13 +17,13 @@ Then, download and extract the datasets:
 
 Now, you can train the model after set the dataset path and download the pretrain_model
 
-Run the following command for SARS-COV-2 [Visformer-tiny-pretrain](https://drive.google.com/file/d/1n9LwZX8Y2LLKzkVqI-euKDdSeXCn35vB/view?usp=share_link):
+Run the following command for SARS-COV-2 [Visformer-tiny-pretrain](https://drive.google.com/file/d/1n9LwZX8Y2LLKzkVqI-euKDdSeXCn35vB/view?usp=share_link) [Visformer-tiny-best](https://drive.google.com/file/d/1WS-VTUj5Ao3xqh5JBF-eCnrsgLnFPm0O/view?usp=sharing):
 
 ```
 sh run_vis_sars.sh
 ```
 
-Run the following command for SARS-COV-2 [Deit-tiny-pretrain](https://drive.google.com/file/d/1DbZ-4R72zzVzAfNmRpY5o_Ic7mg97EZ7/view?usp=sharing):
+Run the following command for SARS-COV-2 [Deit-tiny-pretrain](https://drive.google.com/file/d/1DbZ-4R72zzVzAfNmRpY5o_Ic7mg97EZ7/view?usp=sharing)  [Deit-tiny-best]( https://drive.google.com/file/d/1zoI_aj8yA2UbwOPIYWd1BRKCIN8YSwZe/view?usp=sharing):
 
 ```
 sh run_deit_sars.sh
