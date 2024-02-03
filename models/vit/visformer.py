@@ -442,25 +442,9 @@ def visformer_tiny(conv_layer, linear_layer, input_size, num_classes, data_name,
                       group=8, num_classes=num_classes,
                       attn_stage='011', spatial_conv='100', norm_layer=BatchNorm, conv_init=True,
                       embedding_norm=BatchNorm, **kwargs)
-    pretrained_model = "/share_data/xiangkun/CAP/best_clean_model_pretrain_sars_visformer.pth.tar"
-    pretrained_model = "/data/cap_udr_sars/visformer_t/2-origin-pgd-3.0-adamw-0.001-cosineAnn/best_clean_model.pth.tar"
-    pretrained_model = "/data/cap_udr_skin/visformer_t/1-origin-base-3.0-adamw-0.001-cosineAnn/best_clean_model.pth.tar"
-
-    #pretrained_model = "/share_data/cap_udr/visformer_t/65-udr-pgd-3.0-adamw-0.0001-cosineAnn/best_adv_model.pth.tar"
-    #pretrained_model = "/data/cap_udr_skin/visformer_t/17-tradescutout-pgd-3.0-adamw-0.001-cosineAnn/best_adv_model.pth.tar"
-
-    #/ share_data / xiangkun / Soraka / SARS_COV_2 / visformer_t / pretrain / 165 - pgd - pgd - 3.0 - 1.0 - sgd - 0.01 - cosineAnn /
-
-    # if pretrained:
-    #     if data_name == "SARS_COV_2":
-    #         pretrained_model = "weights/best_clean_model_pretrain_sars_visformer.pth.tar"
-    #     elif data_name == "MosMed_L":
-    #         pretrained_model = "weights/best_clean_model_pretrain_mosmed_visformer.pth.tar"
-
-
-
-
-
+    pretrained_model = "best_clean_model_pretrain_sars_visformer.pth.tar"
+    
+   
 
     ckpt = torch.load(
         pretrained_model,
