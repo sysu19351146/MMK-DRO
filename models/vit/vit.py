@@ -312,7 +312,7 @@ def vit_t(cl, ll, num_classes, pretrained):
     model.default_cfg = _cfg()
     if pretrained:
         ckpt = torch.load(
-            "best_clean_model_pretrain.pth.tar",
+            "best_clean_model_pretrain_sars_deit.pth.tar",
             map_location='cpu')
 
         model_dict = model.state_dict()
