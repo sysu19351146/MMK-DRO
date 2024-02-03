@@ -15,15 +15,15 @@ Then, download and extract the datasets:
 - [Bcn20000](https://challenge.isic-archive.com/data/#2019)
 
 
-Now, you can train the model after set the dataset path
+Now, you can train the model after set the dataset path and download the pretrain_model
 
-Run the following command for SARS-COV-2 [Visformer-tiny](https://drive.google.com/file/d/1n9LwZX8Y2LLKzkVqI-euKDdSeXCn35vB/view?usp=share_link):
+Run the following command for SARS-COV-2 [Visformer-tiny-pretrain](https://drive.google.com/file/d/1n9LwZX8Y2LLKzkVqI-euKDdSeXCn35vB/view?usp=share_link):
 
 ```
 sh run_vis_sars.sh
 ```
 
-Run the following command for SARS-COV-2 [Deit-tiny](https://drive.google.com/file/d/1DbZ-4R72zzVzAfNmRpY5o_Ic7mg97EZ7/view?usp=sharing):
+Run the following command for SARS-COV-2 [Deit-tiny-pretrain](https://drive.google.com/file/d/1DbZ-4R72zzVzAfNmRpY5o_Ic7mg97EZ7/view?usp=sharing):
 
 ```
 sh run_deit_sars.sh
