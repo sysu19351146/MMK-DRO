@@ -69,16 +69,8 @@ def deit_t_distilled(cl, ll,inputs_size, num_classes, data_name, pretrained):
         patch_size=16, embed_dim=192, depth=12, num_heads=3, mlp_ratio=4, qkv_bias=True,
         norm_layer=partial(nn.LayerNorm, eps=1e-6), )
     model.default_cfg = _cfg()
-    pretrained_model = "/share_data/xiangkun/CAP/best_clean_model_pretrain_sars_deit.pth.tar"
-    #pretrained_model = "/data/cap_udr_test/best_clean_model_pretrain_sars_deit.pth.tar"
-    pretrained_model = "/share_data/cap_udr/deit_t_distilled/77-trades-pgd-3.0-adamw-0.0001-cosineAnn/best_clean_model.pth.tar"
-    pretrained_model = "/data/cap_udr_skin/deit_t_distilled/23-origin-base-3.0-adamw-0.0001-cosineAnn/best_clean_model.pth.tar"
-    # if pretrained:
-    #     if data_name == "SARS_COV_2":
-    #         pretrained_model = "weights/best_clean_model_pretrain_sars_deit.pth.tar"
-    #     elif data_name == "MosMed_L":
-    #         pretrained_model = "weights/best_clean_model_pretrain_mosmed_deit.pth.tar"
-
+    pretrained_model = "best_clean_model_pretrain_sars_deit.pth.tar"
+    
     ckpt = torch.load(
         pretrained_model,
         map_location='cpu')
