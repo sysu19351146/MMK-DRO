@@ -1,12 +1,10 @@
 # from src.train import Trainer
 from src.utils.logger import Logger
 from src.utils.utils import *
-from src.utils.visual_show import visual_show
 from models.get_model import get_model
 import dataloaders
 import argparse
 from src.train import *
-from src.visual.saliency_map import generate
 import copy
 
 parser = argparse.ArgumentParser(description='PyTorch deep learning framework')
@@ -167,14 +165,6 @@ def main():
         dataloader = {
             "train": val_loader,
             "val": val_loader, }
-    # elif args.data_name=='skindata':
-    #     dataloader = dataloaders.__dict__[args.data_name](args.data_dir, args.batch_size, args.aug, args.t, args.kernel)
-    #     train_loader, val_loader = dataloader.data_loaders()
-    #     test_loader=dataloader.test_loaders()
-    #     dataloader = {
-    #         "train": train_loader,
-    #         "val": val_loader,
-    #         'test': test_loader}
     else:
         train_data = dataloaders.__dict__[args.data_name](args.data_dir, args.batch_size, args.aug, args.t, args.kernel)
 
@@ -187,12 +177,7 @@ def main():
             test_loader=train_data.test_loaders()
             dataloader['test']=test_loader
     if args.isvisual:
-        # train_dataset,test_dataset=train_data.data_set()
-        visual_show(args,model,val_loader)
-        # args.device = torch.device(f"cuda:0"
-        #                            if torch.cuda.is_available() and args.cuda else "cpu")
-        # model=model.to(args.device)
-        # generate(model, args, prefix='clean')
+        pass
     else:
         # train
         trainer = Trainer(args=args,
